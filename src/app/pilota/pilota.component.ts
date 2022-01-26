@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PilotaModel } from '../models/pilota.model';
 import { PilotaService } from '../pilota.service';
 
 @Component({
@@ -8,14 +9,18 @@ import { PilotaService } from '../pilota.service';
 })
 export class PilotaComponent implements OnInit {
 
-  public pilotak: any[] = [];
+  public pilotak: PilotaModel[] = []; 
 
   constructor(private szerviz:PilotaService) { 
 
       this.szerviz.getPilotak().subscribe( adatok => {
         this.pilotak = adatok;
+
+        //this.pilotak[7].csapatnemzet = "asd";
+
       })
 
+      
   }
 
   ngOnInit(): void {
