@@ -5,7 +5,10 @@
         <td>{{pilota.szuletes}}</td>
         <td>{{pilota.nemzet}}</td>
         <td>{{pilota.magassag}}</td>
-        <td>{{pilota.csapatnev}}</td>
-        <td>{{pilota.csapatnemzet}}</td>
+        <td>{{pilota.csapat?.nev}}</td>
+        <td>{{pilota.csapat?.nemzet}}</td>
+        <td>
+            <button (click)="torles(pilota.ID)">X</button>
+        </td>
     </tr>
 </table>

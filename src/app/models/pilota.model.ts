@@ -1,3 +1,4 @@
+import { CsapatModel } from "./csapat.model";
 
 export class PilotaModel {
     public ID: number = 0;
@@ -5,6 +6,25 @@ export class PilotaModel {
     public magassag: number = 0;
     public szuletes: number = Date.now();
     public nemzet:string = "";
-    public csapatnev: string = "";
-    public csapatnemzet: string = "";
+
+    public csapat:CsapatModel = new CsapatModel("");
+
+    constructor(szerverrolErkezettAdat:any) {
+        
+        this.ID = szerverrolErkezettAdat.ID;
+        this.nev = szerverrolErkezettAdat.nev;
+        this.nemzet = szerverrolErkezettAdat.nemzet;
+        this.szuletes = szerverrolErkezettAdat.szuletes;
+        this.magassag = szerverrolErkezettAdat.magassag;
+
+        if (CsapatModel.csapatokListaja.find(x=> x.nev == szerverrolErkezettAdat.csapatnev) !== undefined)  {
+            this.csapat = CsapatModel.csapatokListaja.find(x=> x.nev == szerverrolErkezettAdat.csapatnev)!;
+        } else {
+            this.csapat = new CsapatModel(szerverrolErkezettAdat);
+        }
+        
+        
+
+        
+    }
 }
