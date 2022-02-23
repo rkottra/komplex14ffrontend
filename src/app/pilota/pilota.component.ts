@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PilotaModel } from '../models/pilota.model';
 import { PilotaService } from '../pilota.service';
 
+
 @Component({
   selector: 'app-pilota',
   templateUrl: './pilota.component.html',
