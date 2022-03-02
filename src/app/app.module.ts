@@ -10,6 +10,15 @@ import { PilotaComponent } from './pilota/pilota.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import {CalendarModule} from 'primeng/calendar';
+
+import {DropdownModule} from 'primeng/dropdown';
+
+
 
 @NgModule({
   declarations: [
@@ -21,8 +30,14 @@ import {TableModule} from 'primeng/table';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
     TableModule,
+    ButtonModule,
+    DialogModule,
+    InputTextModule,
+    CalendarModule,
+    DropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

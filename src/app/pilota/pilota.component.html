@@ -30,11 +30,38 @@
             <td>{{pilota.csapat?.nev}}</td>
             <td>{{pilota.csapat?.nemzet}}</td>
             <td>
-                <button pButton  (click)="torles(pilota.ID)">X</button>
+                <p-button icon="pi pi-times" 
+                class="p-button-rounded p-button-danger p-button-text" (click)="torles(pilota.ID)"
+                Label="Törlés" ></p-button>
             </td>
         </tr>
     </ng-template>
 </p-table>
+
+<p-dialog header="Új adat hozzáadása" [(visible)]="display" [modal]="true" [style]="{width: '50vw', height: '90vh'}">
+    
+    <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+        <input type="text" pInputText [(ngModel)]="ujpilota.nev"/>
+    </div>
+
+    <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+        <p-calendar [(ngModel)]="ujpilota.szuletes"  dateFormat="yy-mm-dd"></p-calendar>
+    </div>
+
+    <div >
+        <p-dropdown [options]="nemzetisegek" [(ngModel)]="ujpilota.nemzet" optionLabel="name" optionValue="code" [editable]="true" ></p-dropdown>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="save()" label="Ok" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-chevron-left" (click)="cancel()" label="Mégse" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+<p-button (click)="showDialog()" 
+icon="pi pi-info-circle" label="Új adat hozzáadása..."></p-button>
 
 <!--
     <table border="1">

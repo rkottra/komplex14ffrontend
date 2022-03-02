@@ -9,18 +9,22 @@ export class PilotaModel {
 
     public csapat:CsapatModel = new CsapatModel("");
 
-    constructor(szerverrolErkezettAdat:any) {
+    constructor(szerverrolErkezettAdat:any = null) {
         
-        this.ID = szerverrolErkezettAdat.ID;
-        this.nev = szerverrolErkezettAdat.nev;
-        this.nemzet = szerverrolErkezettAdat.nemzet;
-        this.szuletes = szerverrolErkezettAdat.szuletes;
-        this.magassag = szerverrolErkezettAdat.magassag;
+        if (szerverrolErkezettAdat === null ) {
+             
+        }else {
+            this.ID = szerverrolErkezettAdat.ID;
+            this.nev = szerverrolErkezettAdat.nev;
+            this.nemzet = szerverrolErkezettAdat.nemzet;
+            this.szuletes = szerverrolErkezettAdat.szuletes;
+            this.magassag = szerverrolErkezettAdat.magassag;
 
-        if (CsapatModel.csapatokListaja.find(x=> x.nev == szerverrolErkezettAdat.csapatnev) !== undefined)  {
-            this.csapat = CsapatModel.csapatokListaja.find(x=> x.nev == szerverrolErkezettAdat.csapatnev)!;
-        } else {
-            this.csapat = new CsapatModel(szerverrolErkezettAdat);
+            if (CsapatModel.csapatokListaja.find(x=> x.nev == szerverrolErkezettAdat.csapatnev) !== undefined)  {
+                this.csapat = CsapatModel.csapatokListaja.find(x=> x.nev == szerverrolErkezettAdat.csapatnev)!;
+            } else {
+                this.csapat = new CsapatModel(szerverrolErkezettAdat);
+            }
         }
         
         
