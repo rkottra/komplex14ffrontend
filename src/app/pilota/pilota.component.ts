@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
+import { CsapatModel } from '../models/csapat.model';
 import { PilotaModel } from '../models/pilota.model';
 import { PilotaService } from '../pilota.service';
 
@@ -22,8 +24,9 @@ export class PilotaComponent implements OnInit {
   
   public nemzetisegek: Nemzetiseg[];
 
-
-  constructor(private szerviz:PilotaService) { 
+  public fejleccime:string  = "Új adat hozzáadása";
+  
+  constructor(private szerviz:PilotaService, private confirmationService: ConfirmationService) { 
 
       this.nemzetisegek = [
           {name: 'angol', code: 'angol'},
@@ -35,7 +38,7 @@ export class PilotaComponent implements OnInit {
        
         this.pilotak = adatok;
 
-        //this.pilotak[7].csapat.nemzet = "asd";
+        
       })
   }
 
@@ -43,11 +46,38 @@ export class PilotaComponent implements OnInit {
   }
 
   showDialog() {
+    this.fejleccime = "Új adat hozzáadása";
     this.display = !this.display;
   }
 
-  save() {
-    alert(this.ujpilota);
+  save(modositas:boolean = true) {
+    if (modositas === false) {
+      this.szerviz.insertPilota(this.ujpilota).subscribe(
+        () => {
+          this.szerviz.getPilotak().subscribe(adatok => {
+            this.pilotak = adatok;
+          })
+          /*
+          this.pilotak.push(this.ujpilota);
+          */
+          this.ujpilota = new PilotaModel();
+          
+        }
+      );
+    } else {
+      this.szerviz.updatePilota(this.ujpilota).subscribe(
+        () => {
+          this.szerviz.getPilotak().subscribe(adatok => {
+            this.pilotak = adatok;
+          })
+          /*
+          this.pilotak.push(this.ujpilota);
+          */
+          this.ujpilota = new PilotaModel();
+          
+        }
+      );
+    }
     this.display = false;
   }
 
@@ -56,7 +86,28 @@ export class PilotaComponent implements OnInit {
   }
   
   torles(pilotaId:number) {
-    this.szerviz.deletePilota(pilotaId).subscribe();
+    this.confirmationService.confirm({
+      message: 'Biztos, hogy törölni szeretnéd?',
+      accept: () => {
+        this.szerviz.deletePilota(pilotaId).subscribe(
+          () => {
+              let index = this.pilotak.findIndex(x=>x.ID == pilotaId);
+              this.pilotak.splice(index, 1);
+          }
+        );
+      }
+    });
+  }
+
+  modositas(pilotaId:number) {
+    this.fejleccime = "Módosítás";
+    this.ujpilota = this.pilotak.find(x => x.ID == pilotaId)!;
+
+    this.display = true;
+  }
+
+  get csapatok() : CsapatModel[] {
+    return CsapatModel.csapatokListaja;
   }
 
 }

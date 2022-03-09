@@ -7,7 +7,7 @@ export class PilotaModel {
     public szuletes: number = Date.now();
     public nemzet:string = "";
 
-    public csapat:CsapatModel = new CsapatModel("");
+    public csapat:CsapatModel = new CsapatModel();
 
     constructor(szerverrolErkezettAdat:any = null) {
         

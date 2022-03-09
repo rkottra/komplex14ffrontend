@@ -22,13 +22,9 @@ export class PilotaService {
 
   getPilotak():Observable<PilotaModel[]> {
     return this.http
-            .get<any[]>("http://localhost:8000/api/pilotak", {headers: {
-              
-              'X-CSRF-TOKEN': this.token,
-              'token': this.token,
-              '_token': this.token,
-              'csrf-token': this.token,
-            }}).pipe(
+            .get<any[]>("http://localhost:8000/api/pilotak", {
+
+            }).pipe(
               map((adatok) => {
                 let seged: PilotaModel[] = [];
                 
@@ -47,13 +43,15 @@ export class PilotaService {
 
   deletePilota(pilotaId: number):Observable<any> {
     return this.http.delete("http://localhost:8000/api/pilotak/"+pilotaId, { 
-    headers: {
-        'X-CSRF-TOKEN': this.token,
-        'token': this.token,
-        '_token': this.token,
-        'csrf-token': this.token,
-      }
     })
+  }
+
+  insertPilota(pilota: PilotaModel):Observable<any> {
+    return this.http.put("http://localhost:8000/api/pilotak/", pilota);
+  }
+
+  updatePilota(pilota: PilotaModel):Observable<any> {
+    return this.http.post("http://localhost:8000/api/pilotak/"+pilota.ID, pilota);
   }
 
 }

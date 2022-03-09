@@ -17,8 +17,10 @@ import { FormsModule } from '@angular/forms';
 import {CalendarModule} from 'primeng/calendar';
 
 import {DropdownModule} from 'primeng/dropdown';
+import {InputNumberModule} from 'primeng/inputnumber';
 
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -38,8 +40,12 @@ import {DropdownModule} from 'primeng/dropdown';
     InputTextModule,
     CalendarModule,
     DropdownModule,
+    InputNumberModule,
+    ConfirmDialogModule,
   ],
-  providers: [],
+  providers: [
+    ConfirmationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

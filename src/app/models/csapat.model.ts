@@ -5,11 +5,16 @@ export class CsapatModel {
 
     public static csapatokListaja:CsapatModel[] = [];
 
-    constructor(szerverrolErkezettAdat:any) {
-        this.ID = szerverrolErkezettAdat.csapatID;
-        this.nemzet = szerverrolErkezettAdat.csapatnemzet;
-        this.nev = szerverrolErkezettAdat.csapatnev; 
+    constructor(szerverrolErkezettAdat:any = null) {
         
-        CsapatModel.csapatokListaja.push(this);
+        if (szerverrolErkezettAdat !== null)
+        {
+            this.ID = szerverrolErkezettAdat.csapatID;
+            this.nemzet = szerverrolErkezettAdat.csapatnemzet;
+            this.nev = szerverrolErkezettAdat.csapatnev; 
+            
+            CsapatModel.csapatokListaja.push(this);
+        }
+        
     }
 }

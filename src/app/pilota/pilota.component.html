@@ -34,11 +34,16 @@
                 class="p-button-rounded p-button-danger p-button-text" (click)="torles(pilota.ID)"
                 Label="Törlés" ></p-button>
             </td>
+            <td>
+                <p-button icon="pi pi-user-edit" 
+                class="p-button-rounded p-button-danger p-button-text" (click)="modositas(pilota.ID)"
+                Label="Módosítás" ></p-button>
+            </td>
         </tr>
     </ng-template>
 </p-table>
 
-<p-dialog header="Új adat hozzáadása" [(visible)]="display" [modal]="true" [style]="{width: '50vw', height: '90vh'}">
+<p-dialog [header]="fejleccime" [(visible)]="display" [modal]="true" [style]="{width: '50vw', height: '90vh'}">
     
     <div class="p-inputgroup">
         <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
@@ -54,29 +59,26 @@
         <p-dropdown [options]="nemzetisegek" [(ngModel)]="ujpilota.nemzet" optionLabel="name" optionValue="code" [editable]="true" ></p-dropdown>
     </div>
 
+    <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+        <p-inputNumber [(ngModel)]="ujpilota.magassag" [min]="0" [max]="300" [showButtons]="true">
+            </p-inputNumber>
+    </div>
+
+    <div >
+        <p-dropdown [options]="csapatok" [(ngModel)]="ujpilota.csapat" 
+            optionLabel="nev" ></p-dropdown>
+    </div>
+
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="save()" label="Ok" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="save(this.ujpilota.ID > 0)" label="Ok" styleClass="p-button-text"></p-button>
         <p-button icon="pi pi-chevron-left" (click)="cancel()" label="Mégse" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
 
+<p-confirmDialog header="Kérdés" icon="pi pi-exclamation-triangle"
+acceptLabel="Igen, törölheted"
+rejectLabel="Mégse, inkább nem szeretném"></p-confirmDialog>
+
 <p-button (click)="showDialog()" 
-icon="pi pi-info-circle" label="Új adat hozzáadása..."></p-button>
-
-<!--
-    <table border="1">
-    <tr *ngFor="let pilota of pilotak">
-        <td>{{pilota.ID}}</td>
-        <td>{{pilota.nev}}</td>
-        <td>{{pilota.szuletes}}</td>
-        <td>{{pilota.nemzet}}</td>
-        <td>{{pilota.magassag}}</td>
-        <td>{{pilota.csapat?.nev}}</td>
-        <td>{{pilota.csapat?.nemzet}}</td>
-        <td>
-            <button (click)="torles(pilota.ID)">X</button>
-        </td>
-    </tr>
-</table>
-
--->
+    icon="pi pi-info-circle" label="Új adat hozzáadása..."></p-button>
